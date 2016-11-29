@@ -29,7 +29,6 @@ public class PawnTest {
         assertEquals(3, testSubject.getYCoordinate());
     }
 
-
     @Test
     public void testPawn_Move_IllegalCoordinates_Right_DoesNotMove() {
         chessBoard.Add(testSubject, 6, 3, PieceColor.BLACK);
