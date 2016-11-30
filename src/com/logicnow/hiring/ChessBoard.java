@@ -1,22 +1,18 @@
 package com.logicnow.hiring;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.ArrayList;
-
 public class ChessBoard {
 
     public static int MAX_BOARD_WIDTH = 7;
     public static int MAX_BOARD_HEIGHT = 7;
 
-    private Pawn[][] pieces;
+    private ChestPiece[][] pieces;
 
     public ChessBoard() {
-        pieces = new Pawn[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
+        pieces = new ChestPiece[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
 
     }
 
-    public void Add(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor) {
+    public void Add(ChestPiece pawn, int xCoordinate, int yCoordinate) {
         if (IsLegalBoardPosition(xCoordinate, yCoordinate)) {
             pawn.setXCoordinate(xCoordinate);
             pawn.setYCoordinate(yCoordinate);
