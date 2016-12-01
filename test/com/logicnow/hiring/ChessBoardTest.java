@@ -16,13 +16,13 @@ public class ChessBoardTest extends TestCase {
     }
 
     @Test
-    public void testHas_MaxBoardWidth_of_7() {
-        assertEquals(7, ChessBoard.MAX_BOARD_HEIGHT);
+    public void testHas_MaxBoardWidth_of_8() {
+        assertEquals(8, ChessBoard.MAX_BOARD_HEIGHT);
     }
 
     @Test
-    public void testHas_MaxBoardHeight_of_7() {
-        assertEquals(7, ChessBoard.MAX_BOARD_HEIGHT);
+    public void testHas_MaxBoardHeight_of_8() {
+        assertEquals(8, ChessBoard.MAX_BOARD_HEIGHT);
     }
 
     @Test
@@ -82,9 +82,9 @@ public class ChessBoardTest extends TestCase {
         for (int i = 0; i < 10; i++) {
             ChestPiece pawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
             int row = i / ChessBoard.MAX_BOARD_WIDTH;
-            testSubject.Add(pawn, 6 + row, i % ChessBoard.MAX_BOARD_WIDTH);
+            testSubject.Add(pawn, 7 + row, i % ChessBoard.MAX_BOARD_WIDTH);
             if (row < 1) {
-                assertEquals(6 + row, pawn.getXCoordinate());
+                assertEquals(7 + row, pawn.getXCoordinate());
                 assertEquals(i % ChessBoard.MAX_BOARD_WIDTH, pawn.getYCoordinate());
             } else {
                 assertEquals(-1, pawn.getXCoordinate());

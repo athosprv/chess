@@ -2,8 +2,8 @@ package com.logicnow.hiring;
 
 public class ChessBoard {
 
-    public static int MAX_BOARD_WIDTH = 7;
-    public static int MAX_BOARD_HEIGHT = 7;
+    public static int MAX_BOARD_WIDTH = 8;
+    public static int MAX_BOARD_HEIGHT = 8;
 
     private final ChestPiece[][] pieces;
 
@@ -24,5 +24,20 @@ public class ChessBoard {
 
     public boolean IsLegalBoardPosition(int xCoordinate, int yCoordinate) {
         return xCoordinate >= 0 && xCoordinate < MAX_BOARD_WIDTH && yCoordinate >= 0 && yCoordinate < MAX_BOARD_HEIGHT;
+    }
+
+    public void printChessBoard() {
+        for (int i = 0; i < MAX_BOARD_WIDTH; i++) {
+            for (int j = 0; j < MAX_BOARD_HEIGHT; j++) {
+                if (pieces[i][j] == null) {
+                    System.out.print("[ ]");
+                } else if (pieces[i][j].getPieceColor().equals("WHITE")) {
+                    System.out.print("[o]");
+                } else {
+                    System.out.print("[*]");
+                }
+            }
+                System.out.println("");            
+        }
     }
 }

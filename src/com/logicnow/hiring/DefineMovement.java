@@ -30,9 +30,16 @@ public class DefineMovement {
                 return "";
             case BISHOP:
                 return "";
-            case KNIGHT:
-                return "";
              */
+            case KNIGHT:
+                if (Math.abs(cp.getXCoordinate() - newX) <= 7 && cp.getYCoordinate() == newY) {
+                    cp.setXCoordinate(newX);
+                } else if (Math.abs(cp.getYCoordinate() - newX) <= 7 && cp.getXCoordinate() == newX) {
+                    cp.setYCoordinate(newY);
+                } else {
+                    return movementMessage += "Failure.";
+                }
+                return movementMessage += "Success.";
             case PAWN:
                 if (Math.abs(cp.getXCoordinate() - newX) == 1 && Math.abs(cp.getYCoordinate() - newY) == 0) {
                     cp.setXCoordinate(newX);
@@ -46,4 +53,5 @@ public class DefineMovement {
                 return "Nothing happened";
         }
     }
+
 }
