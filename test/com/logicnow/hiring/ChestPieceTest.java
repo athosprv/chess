@@ -1,6 +1,5 @@
 package com.logicnow.hiring;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ public class ChestPieceTest {
     @Before
     public void setUp() {
         this.chessBoard = new ChessBoard();
-        this.testSubject = new ChestPiece(PieceColor.BLACK, PieceType.BISHOP);
+        this.testSubject = new ChestPiece(chessBoard, PieceColor.BLACK, PieceType.PAWN);
     }
 
     @Test

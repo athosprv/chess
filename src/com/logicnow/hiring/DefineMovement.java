@@ -13,13 +13,16 @@ public class DefineMovement {
 
     /**
      *
-     * @param cpt
+     * @param cp
      * @return
      */
-    public static String getChessPieceMovement(PieceType cpt) {
+    public static String getChessPieceMovement(ChestPiece cp, int newX, int newY) {
         // use the enum values in our switch statement here
-        switch (cpt) {
-            case KING:
+        String movementMessage = "Trying to move a "
+                + cp.getPieceType() + " from: " + cp.getXCoordinate() + "," + cp.getYCoordinate()
+                + " to " + newX + "," + newY + ". ";
+        switch (cp.getPieceType()) {
+            /*case KING:
                 return "";
             case QUEEN:
                 return "";
@@ -29,10 +32,18 @@ public class DefineMovement {
                 return "";
             case KNIGHT:
                 return "";
+             */
             case PAWN:
-                return "";
+                if (Math.abs(cp.getXCoordinate() - newX) == 1 && Math.abs(cp.getYCoordinate() - newY) == 0) {
+                    cp.setXCoordinate(newX);
+                } else if (Math.abs(cp.getXCoordinate() - newX) == 0 && Math.abs(cp.getYCoordinate() - newY) == 1) {
+                    cp.setYCoordinate(newY);
+                } else {
+                    return movementMessage += "Failure.";
+                }
+                return movementMessage += "Success.";
             default:
-                return null;
+                return "Nothing happened";
         }
     }
 }

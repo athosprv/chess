@@ -17,9 +17,10 @@ public abstract class abstractChestPiece {
     private PieceColor pieceColor;
     private PieceType pieceType;
 
-    public abstractChestPiece(PieceColor pieceColor, PieceType pieceType) {
-        setPieceColor(pieceColor);
-        setPieceType(pieceType);
+    public abstractChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
+        this.pieceColor = pieceColor;
+        this.pieceType = pieceType;
+        this.chessBoard = chessBoard;
     }
 
     public ChessBoard getChesssBoard() {

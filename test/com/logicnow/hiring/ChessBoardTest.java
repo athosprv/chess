@@ -1,18 +1,16 @@
 package com.logicnow.hiring;
 
 import junit.framework.TestCase;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ChessBoardTest extends TestCase {
 
     private ChessBoard testSubject;
 
     @Before
+    @Override
     public void setUp() throws Exception {
         testSubject = new ChessBoard();
     }
@@ -43,7 +41,6 @@ public class ChessBoardTest extends TestCase {
     public void testIsLegalBoardPosition_False_X_equals_11_Y_equals_5() {
         boolean isValidPosition = testSubject.IsLegalBoardPosition(11, 5);
         assertFalse(isValidPosition);
-        //assertTrue();
     }
 
     @Test
@@ -65,21 +62,25 @@ public class ChessBoardTest extends TestCase {
     }
 
     @Test
-    public void Avoids_Duplicate_Positioning() {
-        ChestPiece firstPawn = new ChestPiece(PieceColor.BLACK, PieceType.BISHOP);
-        ChestPiece secondPawn = new ChestPiece(PieceColor.BLACK, PieceType.BISHOP);
+    public void testAvoids_Duplicate_Positioning() {
+        ChestPiece firstPawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
+        ChestPiece secondPawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
+        ChestPiece thirdPawn = new ChestPiece(testSubject, PieceColor.WHITE, PieceType.PAWN);
         testSubject.Add(firstPawn, 6, 3);
         testSubject.Add(secondPawn, 6, 3);
         assertEquals(6, firstPawn.getXCoordinate());
         assertEquals(3, firstPawn.getYCoordinate());
         assertEquals(-1, secondPawn.getXCoordinate());
         assertEquals(-1, secondPawn.getYCoordinate());
+        testSubject.Add(thirdPawn, 6, 3);
+        assertEquals(6, thirdPawn.getXCoordinate());
+        assertEquals(3, thirdPawn.getYCoordinate());
     }
 
     @Test
     public void testLimits_The_Number_Of_Pawns() {
         for (int i = 0; i < 10; i++) {
-            ChestPiece pawn = new ChestPiece(PieceColor.BLACK, PieceType.BISHOP);
+            ChestPiece pawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
             int row = i / ChessBoard.MAX_BOARD_WIDTH;
             testSubject.Add(pawn, 6 + row, i % ChessBoard.MAX_BOARD_WIDTH);
             if (row < 1) {

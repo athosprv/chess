@@ -5,25 +5,24 @@ public class ChessBoard {
     public static int MAX_BOARD_WIDTH = 7;
     public static int MAX_BOARD_HEIGHT = 7;
 
-    private ChestPiece[][] pieces;
+    private final ChestPiece[][] pieces;
 
     public ChessBoard() {
         pieces = new ChestPiece[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
-
     }
 
-    public void Add(ChestPiece pawn, int xCoordinate, int yCoordinate) {
-        if (IsLegalBoardPosition(xCoordinate, yCoordinate)) {
-            pawn.setXCoordinate(xCoordinate);
-            pawn.setYCoordinate(yCoordinate);
-            pieces[xCoordinate][yCoordinate] = pawn;
+    public void Add(ChestPiece cp, int xCoordinate, int yCoordinate) {
+        if (IsLegalBoardPosition(xCoordinate, yCoordinate) && (pieces[xCoordinate][yCoordinate] == null || pieces[xCoordinate][yCoordinate].getPieceColor() != cp.getPieceColor())) {
+            cp.setXCoordinate(xCoordinate);
+            cp.setYCoordinate(yCoordinate);
+            pieces[xCoordinate][yCoordinate] = cp;
         } else {
-            pawn.setXCoordinate(-1);
-            pawn.setYCoordinate(-1);
+            cp.setXCoordinate(-1);
+            cp.setYCoordinate(-1);
         }
     }
 
     public boolean IsLegalBoardPosition(int xCoordinate, int yCoordinate) {
-        return xCoordinate >= 0 && xCoordinate <= MAX_BOARD_WIDTH - 1 && yCoordinate >= 0 && yCoordinate <= MAX_BOARD_HEIGHT - 1;
+        return xCoordinate >= 0 && xCoordinate < MAX_BOARD_WIDTH && yCoordinate >= 0 && yCoordinate < MAX_BOARD_HEIGHT;
     }
 }
