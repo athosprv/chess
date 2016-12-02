@@ -10,6 +10,6 @@ package com.logicnow.hiring;
  *
  * @author Kimchi
  */
-enum PieceType {
+public enum PieceType {
     KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN
 }

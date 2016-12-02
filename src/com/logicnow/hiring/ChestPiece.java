@@ -17,7 +17,13 @@ public class ChestPiece {
     private final PieceColor pieceColor;
     private final PieceType pieceType;
 
-    public ChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
+    /**
+     *
+     * @param chessBoard
+     * @param pieceColor
+     * @param pieceType
+     */
+    protected ChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
         this.chessBoard = chessBoard;
@@ -56,16 +62,24 @@ public class ChestPiece {
     }
 
     public void Move(MovementType movementType, int newX, int newY) {
-        
+
+        String movementMessage = "Trying to move a "
+                + this.getPieceType() + " from: " + this.getXCoordinate() + "," + this.getYCoordinate()
+                + " to " + newX + "," + newY + ". ";
         if (getChesssBoard().IsLegalBoardPosition(newX, newY)) {
             if (movementType.equals(MovementType.MOVE)) {
-                System.out.println(DefineMovement.getChessPieceMovement(this, newX, newY));
+                if (DefineMovement.getChessPieceMovement(this, newX, newY)) {
+                    movementMessage += "Success.";
+                } else {
+                    movementMessage += "Failure. Can't move in that Pattern";
+                }
             } else if (movementType.equals(MovementType.CAPTURE)) {
                 System.out.println("To be defined (or removed)");
             }
         } else {
-            //System.out.println("Illegal move attempt: Chest Piece out of Range");
+            movementMessage += "Failure. Chest Piece out of Range";
         }
+        System.out.println(movementMessage);
     }
 
     @Override

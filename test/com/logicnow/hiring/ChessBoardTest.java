@@ -7,12 +7,12 @@ import org.junit.Test;
 
 public class ChessBoardTest extends TestCase {
 
-    private ChessBoard testSubject;
+    private ChessBoard testChessBoard;
 
     @Before
     @Override
     public void setUp() throws Exception {
-        testSubject = new ChessBoard();
+        testChessBoard = new ChessBoard();
     }
 
     @Test
@@ -27,52 +27,52 @@ public class ChessBoardTest extends TestCase {
 
     @Test
     public void testIsLegalBoardPosition_True_X_equals_0_Y_equals_0() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(0, 0);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(0, 0);
         assertTrue(isValidPosition);
     }
 
     @Test
     public void testIsLegalBoardPosition_True_X_equals_5_Y_equals_5() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(5, 5);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(5, 5);
         Assert.assertTrue(isValidPosition);
     }
 
     @Test
     public void testIsLegalBoardPosition_False_X_equals_11_Y_equals_5() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(11, 5);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(11, 5);
         assertFalse(isValidPosition);
     }
 
     @Test
     public void testIsLegalBoardPosition_False_X_equals_0_Y_equals_9() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(0, 9);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(0, 9);
         assertFalse(isValidPosition);
     }
 
     @Test
     public void testIsLegalBoardPosition_False_X_equals_11_Y_equals_0() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(11, 0);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(11, 0);
         assertFalse(isValidPosition);
     }
 
     @Test
     public void testIsLegalBoardPosition_False_For_Negative_Y_Values() {
-        boolean isValidPosition = testSubject.IsLegalBoardPosition(5, -1);
+        boolean isValidPosition = testChessBoard.IsLegalBoardPosition(5, -1);
         Assert.assertFalse(isValidPosition);
     }
 
     @Test
     public void testAvoids_Duplicate_Positioning() {
-        ChestPiece firstPawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
-        ChestPiece secondPawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
-        ChestPiece thirdPawn = new ChestPiece(testSubject, PieceColor.WHITE, PieceType.PAWN);
-        testSubject.Add(firstPawn, 6, 3);
-        testSubject.Add(secondPawn, 6, 3);
+        ChestPiece firstPawn = new ChestPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
+        ChestPiece secondPawn = new ChestPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
+        ChestPiece thirdPawn = new ChestPiece(testChessBoard, PieceColor.WHITE, PieceType.PAWN);
+        testChessBoard.Add(firstPawn, 6, 3);
+        testChessBoard.Add(secondPawn, 6, 3);
         assertEquals(6, firstPawn.getXCoordinate());
         assertEquals(3, firstPawn.getYCoordinate());
         assertEquals(-1, secondPawn.getXCoordinate());
         assertEquals(-1, secondPawn.getYCoordinate());
-        testSubject.Add(thirdPawn, 6, 3);
+        testChessBoard.Add(thirdPawn, 6, 3);
         assertEquals(6, thirdPawn.getXCoordinate());
         assertEquals(3, thirdPawn.getYCoordinate());
     }
@@ -80,9 +80,9 @@ public class ChessBoardTest extends TestCase {
     @Test
     public void testLimits_The_Number_Of_Pawns() {
         for (int i = 0; i < 10; i++) {
-            ChestPiece pawn = new ChestPiece(testSubject, PieceColor.BLACK, PieceType.PAWN);
+            ChestPiece pawn = new ChestPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
             int row = i / ChessBoard.MAX_BOARD_WIDTH;
-            testSubject.Add(pawn, 7 + row, i % ChessBoard.MAX_BOARD_WIDTH);
+            testChessBoard.Add(pawn, 7 + row, i % ChessBoard.MAX_BOARD_WIDTH);
             if (row < 1) {
                 assertEquals(7 + row, pawn.getXCoordinate());
                 assertEquals(i % ChessBoard.MAX_BOARD_WIDTH, pawn.getYCoordinate());
