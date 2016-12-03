@@ -23,7 +23,7 @@ public class ChestPiece {
      * @param pieceColor
      * @param pieceType
      */
-    protected ChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
+    public ChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
         this.chessBoard = chessBoard;
@@ -66,9 +66,14 @@ public class ChestPiece {
         String movementMessage = "Trying to move a "
                 + this.getPieceType() + " from: " + this.getXCoordinate() + "," + this.getYCoordinate()
                 + " to " + newX + "," + newY + ". ";
+        int oldX = this.getXCoordinate();
+        int oldY = this.getYCoordinate();
         if (getChesssBoard().IsLegalBoardPosition(newX, newY)) {
-            if (movementType.equals(MovementType.MOVE)) {
+            if (newX == oldX && newY == oldY) {
+                movementMessage += "Failure. Chest Piece Already there";
+            } else if (movementType.equals(MovementType.MOVE)) {
                 if (DefineMovement.getChessPieceMovement(this, newX, newY)) {
+                    this.chessBoard.UpdateChestPieceMove(oldX, oldY, newX, newY);
                     movementMessage += "Success.";
                 } else {
                     movementMessage += "Failure. Can't move in that Pattern";
@@ -79,7 +84,7 @@ public class ChestPiece {
         } else {
             movementMessage += "Failure. Chest Piece out of Range";
         }
-        System.out.println(movementMessage);
+        //System.out.println(movementMessage);
     }
 
     @Override

@@ -91,5 +91,24 @@ public class ChessBoardTest extends TestCase {
                 Assert.assertEquals(-1, pawn.getYCoordinate());
             }
         }
+
+    }
+
+    @Test
+    public void testsUpdate_ChessBoard_WithCHestPiece_Movement() {
+        ChestPiece pawn = new ChestPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
+        ChestPiece bishop = new ChestPiece(testChessBoard, PieceColor.WHITE, PieceType.BISHOP);
+        testChessBoard.Add(pawn, 4, 5);
+        pawn.Move(MovementType.MOVE, 4, 6);
+        assertEquals(testChessBoard.Retrieve(4, 5), null);
+        assertEquals(testChessBoard.Retrieve(4, 6), pawn);
+        pawn.Move(MovementType.MOVE, 2, 6);
+        assertEquals(testChessBoard.Retrieve(2, 6), null);
+        assertEquals(testChessBoard.Retrieve(4, 6), pawn);
+        testChessBoard.Add(bishop, 4, 5);
+        bishop.Move(MovementType.MOVE, 4, 5);
+        bishop.Move(MovementType.MOVE, 5, 6);
+        assertEquals(testChessBoard.Retrieve(4, 5), null);
+        assertEquals(testChessBoard.Retrieve(5, 6), bishop);
     }
 }

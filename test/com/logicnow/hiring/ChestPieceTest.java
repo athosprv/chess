@@ -54,7 +54,7 @@ public class ChestPieceTest {
         chessBoard.Add(testPawn, 6, 3);
         testPawn.Move(MovementType.MOVE, 6, 2);
         assertEquals(6, testPawn.getXCoordinate());
-        assertEquals(2, testPawn.getYCoordinate());
+        assertEquals(2, testPawn.getYCoordinate());                
     }
 
     @Test

@@ -5,7 +5,7 @@ public class ChessBoard {
     public static int MAX_BOARD_WIDTH = 8;
     public static int MAX_BOARD_HEIGHT = 8;
 
-    private final ChestPiece[][] chessBoard;
+    private ChestPiece[][] chessBoard;
 
     public ChessBoard() {
         chessBoard = new ChestPiece[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
@@ -26,18 +26,35 @@ public class ChessBoard {
         return xCoordinate >= 0 && xCoordinate < MAX_BOARD_WIDTH && yCoordinate >= 0 && yCoordinate < MAX_BOARD_HEIGHT;
     }
 
-    public void printChessBoard() {
+    public ChestPiece Retrieve(int x, int y) {
+        if (this.chessBoard[x][y] == null) {
+            return null;
+        } else {
+            return this.chessBoard[x][y];
+        }
+    }
+
+    public void UpdateChestPieceMove(int oldX, int oldY, int newX, int newY) {
+        this.chessBoard[newX][newY] = this.chessBoard[oldX][oldY];
+        this.chessBoard[oldX][oldY] = null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder chessBoard2D = new StringBuilder();
         for (int j = 0; j < MAX_BOARD_WIDTH; j++) {
             for (int i = 0; i < MAX_BOARD_HEIGHT; i++) {
                 if (chessBoard[i][j] == null) {
-                    System.out.print("[" + i + " " + j + "]");
-                } else if (chessBoard[i][j].getPieceColor().equals("WHITE")) {
-                    System.out.print("[" + i + "o" + j + "]");
-                } else {
-                    System.out.print("[" + i + "*" + j + "]");
+                    chessBoard2D.append("[").append(i).append(" ").append(j).append("]");
+                } else if (chessBoard[i][j].getPieceColor() == PieceColor.WHITE) {
+                    chessBoard2D.append("[").append(i).append("o").append(j).append("]");
+                } else if (chessBoard[i][j].getPieceColor() == PieceColor.BLACK) {
+                    chessBoard2D.append("[").append(i).append("*").append(j).append("]");
                 }
             }
-            System.out.println("");
+            chessBoard2D.append("\n");
         }
+        return chessBoard2D.toString();
     }
+
 }
