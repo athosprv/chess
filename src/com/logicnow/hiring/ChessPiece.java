@@ -76,22 +76,24 @@ public class ChessPiece {
         if (getChesssBoard().IsLegalBoardPosition(newX, newY)) {
             if (newX == oldX && newY == oldY) {
                 movementMessage += "Failure. Old and New move is the same";
-            } else if (getChesssBoard().Retrieve(newX, newY) != null) {
-                movementMessage += "Failure. Another Chess Piece exists at that location";
-            } else if (movementType.equals(MovementType.MOVE)) {
+            } else if (getChesssBoard().Retrieve(newX, newY) != null && movementType != MovementType.CAPTURE) {
+                movementMessage += "Failure. Another Chess Piece of the same color exists at that location";
+            } else if (movementType.equals(MovementType.MOVE) || movementType.equals(MovementType.CAPTURE)) {
                 if (DefineMovement.getChessPieceMovement(this, movementType, newX, newY)) {
                     this.chessBoard.UpdateChessPieceMove(oldX, oldY, newX, newY);
-                    movementMessage += "Success.";
+                    if (movementType.equals(MovementType.MOVE)) {
+                        movementMessage += "Movement Success.";
+                    } else if (movementType.equals(MovementType.CAPTURE)) {
+                        movementMessage += "Capture Success.";
+                    }
                 } else {
                     movementMessage += "Failure. Can't move in that Pattern, or path blocked";
                 }
-            } else if (movementType.equals(MovementType.CAPTURE)) {
-                System.out.println("To be defined (or removed)");
             }
         } else {
             movementMessage += "Failure. Chest Piece out of Range";
         }
-        //System.out.println(movementMessage);
+        System.out.println(movementMessage);
     }
 
     @Override

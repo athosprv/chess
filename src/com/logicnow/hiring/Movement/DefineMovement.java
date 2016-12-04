@@ -22,7 +22,7 @@ public class DefineMovement {
      * @return
      */
     public static boolean getChessPieceMovement(ChessPiece cp, MovementType movementType, int newX, int newY) {
-        if (DefineCollisions.ensureNoCollisions(cp, newX, newY)) {
+        if (DefineCollisions.ensureNoCollisions(cp, movementType, newX, newY)) {
             switch (cp.getPieceType()) {
                 case KING:
                     return ValidateKingMovement(cp, newX, newY);
