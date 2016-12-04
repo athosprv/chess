@@ -93,7 +93,7 @@ public class ChessPiece {
         } else {
             movementMessage += "Failure. Chest Piece out of Range";
         }
-        System.out.println(movementMessage);
+        //System.out.println(movementMessage);
     }
 
     @Override

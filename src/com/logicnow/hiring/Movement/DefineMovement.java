@@ -80,15 +80,14 @@ public class DefineMovement {
 
     private static boolean ValidatePawnMovement(ChessPiece cp, int newX, int newY) {
         if (Math.abs(cp.getXCoordinate() - newX) == 0) {
-            boolean whitePieceMovesDown = (cp.getYCoordinate() - newY) == -1 && cp.getPieceColor().equals(PieceColor.WHITE);
-            boolean blackPieceMovesUp = (cp.getYCoordinate() - newY) == 1 && cp.getPieceColor().equals(PieceColor.BLACK);
-            if (whitePieceMovesDown || blackPieceMovesUp) {
-                cp.setYCoordinate(newY);
+            if (cp.getPieceColor().equals(PieceColor.WHITE)) {
+                return (cp.getYCoordinate() - newY) == -1 && cp.getPieceColor().equals(PieceColor.WHITE);
+            } else if (cp.getPieceColor().equals(PieceColor.BLACK)) {
+                return (cp.getYCoordinate() - newY) == 1 && cp.getPieceColor().equals(PieceColor.BLACK);
             }
-        } else {
-            return false;
         }
-        return true;
+        return false;
+
     }
 
     private static boolean ValidateQueenMovement(ChessPiece cp, int newX, int newY) {

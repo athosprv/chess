@@ -11,18 +11,11 @@ import org.junit.Test;
 public class ChessBoardTest extends TestCase {
 
     private ChessBoard testChessBoard;
-    private ChessPiece testPawn, testRook, testKnight, testBishop, testQueen, testKing;
 
     @Before
     @Override
     public void setUp() throws Exception {
         this.testChessBoard = new ChessBoard();
-        this.testPawn = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.PAWN);
-        this.testRook = new ChessPiece(testChessBoard, PieceColor.BLACK, PieceType.ROOK);
-        this.testKnight = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.KNIGHT);
-        this.testBishop = new ChessPiece(testChessBoard, PieceColor.BLACK, PieceType.BISHOP);
-        this.testQueen = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.QUEEN);
-        this.testKing = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.KING);
     }
 
     @Test
@@ -102,20 +95,23 @@ public class ChessBoardTest extends TestCase {
 
     @Test
     public void testsUpdate_ChessBoard_WithCHestPiece_Movement() {
-        ChessPiece pawn = new ChessPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
-        ChessPiece bishop = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.BISHOP);
-        testChessBoard.Add(pawn, 4, 5);
-        pawn.Move(MovementType.MOVE, 4, 6);
-        assertEquals(testChessBoard.Retrieve(4, 5), null);
-        assertEquals(testChessBoard.Retrieve(4, 6), pawn);
-        pawn.Move(MovementType.MOVE, 2, 6);
+        ChessPiece whitePawn = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.PAWN);
+        ChessPiece blackPawn = new ChessPiece(testChessBoard, PieceColor.BLACK, PieceType.PAWN);
+        ChessPiece bishop = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.BISHOP);        
+        testChessBoard.Add(whitePawn, 5, 0);
+        testChessBoard.Add(blackPawn, 4, 5);        
+        blackPawn.Move(MovementType.MOVE, 4, 6);
+        assertEquals(testChessBoard.Retrieve(4, 5), blackPawn);
+        assertEquals(testChessBoard.Retrieve(4, 6), null);
+        blackPawn.Move(MovementType.MOVE, 2, 6);
         assertEquals(testChessBoard.Retrieve(2, 6), null);
-        assertEquals(testChessBoard.Retrieve(4, 6), pawn);
-        testChessBoard.Add(bishop, 4, 5);
-        bishop.Move(MovementType.MOVE, 4, 5);
+        assertEquals(testChessBoard.Retrieve(4, 5), blackPawn);
+        testChessBoard.Add(bishop, 5, 6);
         bishop.Move(MovementType.MOVE, 5, 6);
-        assertEquals(testChessBoard.Retrieve(4, 5), null);
-        assertEquals(testChessBoard.Retrieve(5, 6), bishop);
+        bishop.Move(MovementType.MOVE, 6, 7);
+        assertEquals(testChessBoard.Retrieve(5, 6), null);
+        assertEquals(testChessBoard.Retrieve(6, 7), bishop);
+        
     }
 
     @Test
@@ -125,21 +121,20 @@ public class ChessBoardTest extends TestCase {
         ChessPiece king = new ChessPiece(testChessBoard, PieceColor.BLACK, PieceType.KING);
         ChessPiece bishop = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.BISHOP);
         ChessPiece queen = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.QUEEN);
-        testChessBoard.Add(whitePawn, 3, 2);
-        testChessBoard.Add(blackPawn, 3, 4);
-        whitePawn.Move(MovementType.MOVE, 3, 3);
-        assertEquals(testChessBoard.Retrieve(3, 3), whitePawn);
+        testChessBoard.Add(whitePawn, 3, 3);
+        testChessBoard.Add(blackPawn, 3, 5);
+        System.out.println(testChessBoard);
         whitePawn.Move(MovementType.MOVE, 3, 4);
-        assertEquals(testChessBoard.Retrieve(3, 3), whitePawn);
+        assertEquals(testChessBoard.Retrieve(3, 4), whitePawn);
+        whitePawn.Move(MovementType.MOVE, 3, 4);
+        assertEquals(testChessBoard.Retrieve(3, 4), whitePawn);
         blackPawn.Move(MovementType.MOVE, 3, 3);
-        assertEquals(testChessBoard.Retrieve(3, 4), blackPawn);
-        testChessBoard.Add(king, 3, 5);
-        king.Move(MovementType.MOVE, 3, 4);
-        assertEquals(testChessBoard.Retrieve(3, 5), king);
-        king.Move(MovementType.MOVE, 2, 4);
-        assertEquals(testChessBoard.Retrieve(2, 4), king);
-        king.Move(MovementType.MOVE, 0, 2);
-        assertEquals(testChessBoard.Retrieve(2, 4), king);
+        assertEquals(testChessBoard.Retrieve(3,5), blackPawn);
+        testChessBoard.Add(king, 3, 6);
+        king.Move(MovementType.MOVE, 2, 5);
+        assertEquals(testChessBoard.Retrieve(2, 5), king);
+        king.Move(MovementType.MOVE, 1, 6);
+        assertEquals(testChessBoard.Retrieve(1, 6), king);
         testChessBoard.Add(bishop, 6, 7);
         bishop.Move(MovementType.MOVE, 2, 3);
         assertEquals(testChessBoard.Retrieve(6, 7), bishop);
@@ -176,6 +171,6 @@ public class ChessBoardTest extends TestCase {
         assertEquals(testChessBoard.Retrieve(2, 2), knight);
         knight.Move(MovementType.MOVE, 0, 1);
         assertEquals(testChessBoard.Retrieve(0, 1), knight);
-        System.out.println(testChessBoard);
+        
     }
 }
