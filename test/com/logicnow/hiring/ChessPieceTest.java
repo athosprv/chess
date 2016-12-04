@@ -1,24 +1,27 @@
 package com.logicnow.hiring;
 
+import com.logicnow.hiring.Enum.PieceType;
+import com.logicnow.hiring.Enum.PieceColor;
+import com.logicnow.hiring.Movement.MovementType;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ChestPieceTest {
+public class ChessPieceTest {
 
     private ChessBoard chessBoard;
-    private ChestPiece testPawn, testRook, testKnight, testBishop, testQueen, testKing;
+    private ChessPiece testPawn, testRook, testKnight, testBishop, testQueen, testKing;
 
     @Before
     public void setUp() {
         this.chessBoard = new ChessBoard();
-        this.testPawn = new ChestPiece(chessBoard, PieceColor.BLACK, PieceType.PAWN);
-        this.testRook = new ChestPiece(chessBoard, PieceColor.BLACK, PieceType.ROOK);
-        this.testKnight = new ChestPiece(chessBoard, PieceColor.WHITE, PieceType.KNIGHT);
-        this.testBishop = new ChestPiece(chessBoard, PieceColor.BLACK, PieceType.BISHOP);
-        this.testQueen = new ChestPiece(chessBoard, PieceColor.WHITE, PieceType.QUEEN);
-        this.testKing = new ChestPiece(chessBoard, PieceColor.WHITE, PieceType.KING);
+        this.testPawn = new ChessPiece(chessBoard, PieceColor.WHITE, PieceType.PAWN);
+        this.testRook = new ChessPiece(chessBoard, PieceColor.BLACK, PieceType.ROOK);
+        this.testKnight = new ChessPiece(chessBoard, PieceColor.WHITE, PieceType.KNIGHT);
+        this.testBishop = new ChessPiece(chessBoard, PieceColor.BLACK, PieceType.BISHOP);
+        this.testQueen = new ChessPiece(chessBoard, PieceColor.WHITE, PieceType.QUEEN);
+        this.testKing = new ChessPiece(chessBoard, PieceColor.WHITE, PieceType.KING);
     }
 
     @Test
@@ -52,11 +55,19 @@ public class ChestPieceTest {
     @Test
     public void testPawn_Move_LegalCoordinates_Up_UpdatesCoordinates() {
         chessBoard.Add(testPawn, 6, 3);
-        testPawn.Move(MovementType.MOVE, 6, 2);
+        testPawn.Move(MovementType.MOVE, 6, 4);
         assertEquals(6, testPawn.getXCoordinate());
-        assertEquals(2, testPawn.getYCoordinate());                
+        assertEquals(4, testPawn.getYCoordinate());                
     }
 
+    @Test
+    public void testPawn_Move_IllegalCoordinates_Down_DoesNotMove() {
+        chessBoard.Add(testPawn, 6, 3);
+        testPawn.Move(MovementType.MOVE, 6, 2);
+        assertEquals(6, testPawn.getXCoordinate());
+        assertEquals(3, testPawn.getYCoordinate());                
+    }    
+    
     @Test
     public void testRook_Move_LegalCoordinates_Down_UpdatesCoordinates() {
         chessBoard.Add(testRook, 7, 5);
@@ -198,6 +209,6 @@ public class ChestPieceTest {
         chessBoard.Add(testKing, 1, 1);
         testKing.Move(MovementType.MOVE, 2, 1);
         assertEquals(2, testKing.getXCoordinate());
-        assertEquals(1, testKing.getYCoordinate());
+        assertEquals(1, testKing.getYCoordinate());        
     }
 }

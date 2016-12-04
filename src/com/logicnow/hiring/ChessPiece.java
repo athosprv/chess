@@ -5,11 +5,16 @@
  */
 package com.logicnow.hiring;
 
+import com.logicnow.hiring.Enum.PieceColor;
+import com.logicnow.hiring.Enum.PieceType;
+import com.logicnow.hiring.Movement.MovementType;
+import com.logicnow.hiring.Movement.DefineMovement;
+
 /**
  *
  * @author Kimchi
  */
-public class ChestPiece {
+public class ChessPiece {
 
     private ChessBoard chessBoard;
     private int xCoordinate;
@@ -23,7 +28,7 @@ public class ChestPiece {
      * @param pieceColor
      * @param pieceType
      */
-    public ChestPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
+    public ChessPiece(ChessBoard chessBoard, PieceColor pieceColor, PieceType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
         this.chessBoard = chessBoard;
@@ -70,13 +75,15 @@ public class ChestPiece {
         int oldY = this.getYCoordinate();
         if (getChesssBoard().IsLegalBoardPosition(newX, newY)) {
             if (newX == oldX && newY == oldY) {
-                movementMessage += "Failure. Chest Piece Already there";
+                movementMessage += "Failure. Old and New move is the same";
+            } else if (getChesssBoard().Retrieve(newX, newY) != null) {
+                movementMessage += "Failure. Another Chess Piece exists at that location";
             } else if (movementType.equals(MovementType.MOVE)) {
-                if (DefineMovement.getChessPieceMovement(this, newX, newY)) {
-                    this.chessBoard.UpdateChestPieceMove(oldX, oldY, newX, newY);
+                if (DefineMovement.getChessPieceMovement(this, movementType, newX, newY)) {
+                    this.chessBoard.UpdateChessPieceMove(oldX, oldY, newX, newY);
                     movementMessage += "Success.";
                 } else {
-                    movementMessage += "Failure. Can't move in that Pattern";
+                    movementMessage += "Failure. Can't move in that Pattern, or path blocked";
                 }
             } else if (movementType.equals(MovementType.CAPTURE)) {
                 System.out.println("To be defined (or removed)");
