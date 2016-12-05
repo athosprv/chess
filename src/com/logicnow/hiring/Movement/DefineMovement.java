@@ -35,7 +35,7 @@ public class DefineMovement {
                 case ROOK:
                     return ValidateRookMovement(cp, newX, newY);
                 case PAWN:
-                    return ValidatePawnMovement(cp, newX, newY);
+                    return ValidatePawnMovement(cp, movementType, newX, newY);
             }
         }
         return false;
@@ -78,15 +78,44 @@ public class DefineMovement {
         return true;
     }
 
-    private static boolean ValidatePawnMovement(ChessPiece cp, int newX, int newY) {
-        if (Math.abs(cp.getXCoordinate() - newX) == 0) {
-            if (cp.getPieceColor().equals(PieceColor.WHITE)) {
-                return (cp.getYCoordinate() - newY) == -1 && cp.getPieceColor().equals(PieceColor.WHITE);
-            } else if (cp.getPieceColor().equals(PieceColor.BLACK)) {
-                return (cp.getYCoordinate() - newY) == 1 && cp.getPieceColor().equals(PieceColor.BLACK);
-            }
+    private static boolean ValidatePawnMovement(ChessPiece cp, MovementType mt, int newX, int newY) {
+        switch (mt) {
+            case MOVE:
+                if (Math.abs(cp.getXCoordinate() - newX) == 0) {
+                    if (cp.getPieceColor().equals(PieceColor.WHITE) && ((cp.getYCoordinate() - newY) == -1)) {
+                        cp.setYCoordinate(newY);
+                    } else if (cp.getPieceColor().equals(PieceColor.BLACK) && ((cp.getYCoordinate() - newY) == 1)) {
+                        cp.setYCoordinate(newY);
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }   break;
+            case CAPTURE:
+                switch (cp.getPieceColor()) {
+                    case WHITE:
+                        boolean downLeftCapture = (cp.getXCoordinate() - newX == 1 && cp.getYCoordinate() - newY == -1);
+                        boolean downRightCapture = (cp.getXCoordinate() - newX == -1 && cp.getYCoordinate() - newY == 1);
+                        
+                        if (downLeftCapture || downRightCapture) {
+                            cp.setXCoordinate(newX);
+                            cp.setYCoordinate(newY);
+                        }
+                    case BLACK:
+                        boolean upLeftCapture = (cp.getXCoordinate() - newX == 1 && cp.getYCoordinate() - newY == 1);
+                        boolean upRightCapture = (cp.getXCoordinate() - newX == -1 && cp.getYCoordinate() - newY == -1);
+                        if (upLeftCapture || upRightCapture) {
+                            cp.setXCoordinate(newX);
+                            cp.setYCoordinate(newY);
+                        }
+                        
+                }   break;
+            default:
+                return false;
         }
-        return false;
+        
+        return true;
 
     }
 

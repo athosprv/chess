@@ -61,9 +61,9 @@ public class ChessBoard {
                 if (chessBoard[i][j] == null) {
                     chessBoard2D.append("[").append(i).append("     ").append(j).append("]");
                 } else if (chessBoard[i][j].getPieceColor() == PieceColor.WHITE) {
-                    chessBoard2D.append("[").append("W"+chessPieceNames.get(chessBoard[i][j].getPieceType())).append(": ").append(i).append(",").append(j).append("]");
+                    chessBoard2D.append("[").append("W" + chessPieceNames.get(chessBoard[i][j].getPieceType())).append(": ").append(i).append(",").append(j).append("]");
                 } else if (chessBoard[i][j].getPieceColor() == PieceColor.BLACK) {
-                    chessBoard2D.append("[").append("B"+chessPieceNames.get(chessBoard[i][j].getPieceType())).append(": ").append(i).append(",").append(j).append("]");
+                    chessBoard2D.append("[").append("B" + chessPieceNames.get(chessBoard[i][j].getPieceType())).append(": ").append(i).append(",").append(j).append("]");
                 }
             }
             chessBoard2D.append("\n");

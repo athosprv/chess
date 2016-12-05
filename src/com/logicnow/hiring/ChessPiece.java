@@ -98,7 +98,7 @@ public class ChessPiece {
 
     @Override
     public String toString() {
-        return "Current X: {" + xCoordinate + "}Current Y: {" + yCoordinate + "}Piece Color: {" + pieceColor + "}+ Piece Type: {" + pieceType + "}";
+        return "Current X: {" + xCoordinate + "}Current Y: {" + yCoordinate + "}Piece Color: {" + pieceColor + "} Piece Type: {" + pieceType + "}";
     }
 
 }

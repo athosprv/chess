@@ -1,7 +1,8 @@
 package com.logicnow.hiring;
 
-import com.logicnow.hiring.Enum.PieceType;
+
 import com.logicnow.hiring.Enum.PieceColor;
+import com.logicnow.hiring.Enum.PieceType;
 import com.logicnow.hiring.Movement.MovementType;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -102,7 +103,7 @@ public class ChessBoardTest extends TestCase {
         testChessBoard.Add(blackPawn, 4, 5);        
         blackPawn.Move(MovementType.MOVE, 4, 6);
         assertEquals(testChessBoard.Retrieve(4, 5), blackPawn);
-        assertEquals(testChessBoard.Retrieve(4, 6), null);
+        assertEquals(testChessBoard.Retrieve(4, 6), null);        
         blackPawn.Move(MovementType.MOVE, 2, 6);
         assertEquals(testChessBoard.Retrieve(2, 6), null);
         assertEquals(testChessBoard.Retrieve(4, 5), blackPawn);
@@ -123,7 +124,6 @@ public class ChessBoardTest extends TestCase {
         ChessPiece queen = new ChessPiece(testChessBoard, PieceColor.WHITE, PieceType.QUEEN);
         testChessBoard.Add(whitePawn, 3, 3);
         testChessBoard.Add(blackPawn, 3, 5);
-        System.out.println(testChessBoard);
         whitePawn.Move(MovementType.MOVE, 3, 4);
         assertEquals(testChessBoard.Retrieve(3, 4), whitePawn);
         whitePawn.Move(MovementType.MOVE, 3, 4);
